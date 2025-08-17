@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.card.MaterialCardView
 
@@ -21,6 +22,9 @@ class DiceBoardActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowCompat.getInsetsController(window, window.decorView).apply {
+                isAppearanceLightStatusBars = false
+            }
             insets
         }
 
@@ -79,7 +83,7 @@ class DiceBoardActivity : AppCompatActivity() {
         playButton.setOnClickListener {
             if (selectedIndex != null) {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("playersNumber", selectedIndex!! + 1)
+                intent.putExtra("playersNumber", selectedIndex + 1)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Please Select a Card", Toast.LENGTH_SHORT).show()
