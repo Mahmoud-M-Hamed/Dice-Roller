@@ -73,7 +73,7 @@ class DiceBoardActivity : AppCompatActivity() {
 
                 // Highlight selected card
                 card.setCardBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                card.strokeColor = ContextCompat.getColor(this, R.color.orange)
+                card.strokeColor = ContextCompat.getColor(this, R.color.light_green)
                 card.strokeWidth = 10
                 selectedIndex = index
             }
@@ -83,7 +83,7 @@ class DiceBoardActivity : AppCompatActivity() {
         playButton.setOnClickListener {
             if (selectedIndex != null) {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("playersNumber", selectedIndex + 1)
+                intent.putExtra("playersNumber", selectedIndex!! + 1)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Please Select a Card", Toast.LENGTH_SHORT).show()
